@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test</title>
+    <style>
+        #main {
+            padding: 12px
+        }
+    </style>
+</head>
+<body>
+    <div id="main">
+        <!-- <form id="input_angka" onsubmit="submitForm(event)"> -->
+            <div style="margin: 20px 0">
+                <input type="number" name="angka" id="angka" placeholder="Input Angka">
+            </div>
+            <div>
+                <button type="button" id="segitiga" onclick="buttonTriangle()">Generate Segitiga</button>
+                <button type="button" id="ganjil" onclick="buttonGanjil()">Generate Bilagan Ganjil</button>
+                <button type="button" id="prima" onclick="buttonPrima()">Generate Bilangan Prima</button>
+            </div>
+        <!-- </form> -->
+        <h2>RESULT :</h2>
+        <div id="result"></div>
+    </div>
+</body>
+
+<script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
+
+<script>
+    const URL = "http://127.0.0.1:8000/"
+
+    function buttonTriangle(){
+        const angka = document.getElementById("angka").value
+        if(angka.length == 0){
+            alert('angka tidak boleh kosong')
+            return false
+        }
+
+        if(parseInt(angka) == NaN){
+            alert('input harus angka');
+            return false;
+        }
+
+        const data = {
+            "angka" : angka
+        }
+
+        $.ajax({
+            url: URL + 'segitiga',
+            type: 'POST',
+            data: JSON.stringify(data),
+            contentType : 'application/json',
+            success: function(data){
+                $("#result").html(data)
+            }
+        })
+        return true
+    }
+
+    function buttonGanjil(){
+        const angka = document.getElementById("angka").value
+        if(angka.length == 0){
+            alert('angka tidak boleh kosong')
+            return false
+        }
+
+        if(parseInt(angka) == NaN){
+            alert('input harus angka');
+            return false;
+        }
+
+        const data = {
+            "angka" : angka
+        }
+
+        $.ajax({
+            url: URL + 'ganjil',
+            type: 'POST',
+            data: JSON.stringify(data),
+            contentType : 'application/json',
+            success: function(data){
+                $("#result").html(data)
+            }
+        })
+        return true
+    }
+
+    function buttonPrima(){
+        const angka = document.getElementById("angka").value
+        if(angka.length == 0){
+            alert('angka tidak boleh kosong')
+            return false
+        }
+
+        if(parseInt(angka) == NaN){
+            alert('input harus angka');
+            return false;
+        }
+
+        const data = {
+            "angka" : angka
+        }
+
+        $.ajax({
+            url: URL + 'prima',
+            type: 'POST',
+            data: JSON.stringify(data),
+            contentType : 'application/json',
+            success: function(data){
+                $("#result").html(data)
+            }
+        })
+        return true
+    }
+</script>
+</html>
